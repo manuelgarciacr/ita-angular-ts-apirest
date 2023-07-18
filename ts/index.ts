@@ -1,20 +1,17 @@
-const AXIOS = require('axios').default;
-const INSTANCE = AXIOS.create({
-    baseURL: 'https://icanhazdadjoke.com/api',
+// @ts-ignore
+import axios from "../../node_modules/axios/dist/esm/axios.js"
+
+const INSTANCE = axios.create({
+    baseURL: 'https://icanhazdadjoke.com',
     timeout: 1000,
     headers: {'Accept': 'application/json'},
     responseType: 'json'
 });
-const GETJOKE = async () => {
-    try {
-        const response = await INSTANCE.get();
-        console.log(response);
-    } catch (error) {
-        console.error(error);
-    }
-}
+const BTN = document.getElementById("id-next");
+const JOKE_DIV = document.getElementById("id-joke")
+const getJoke = async () => await INSTANCE.get("");
+const nextJoke = () =>
+    getJoke().then(res => JOKE_DIV!.innerText = res.data.joke);
 
-GETJOKE();
-
-
+BTN!.addEventListener("click", nextJoke)
 

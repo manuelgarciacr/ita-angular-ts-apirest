@@ -1,9 +1,24 @@
 {
-  "devDependencies": {
-    "@types/node": "^20.4.2",
-    "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "axios": "^1.4.0"
-  }
+    "dependencies": {
+        "axios": "^1.4.0"
+    },
+    "name": "ita-angular-ts-apirest",
+    "description": "$ npx tsc -w",
+    "version": "1.0.0",
+    "main": "src/index.html",
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "npx tsc -w"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/manuelgarciacr/ita-angular-ts-apirest.git"
+    },
+    "author": "Manuel García Criado",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/manuelgarciacr/ita-angular-ts-apirest/issues"
+    },
+    "homepage": "https://github.com/manuelgarciacr/ita-angular-ts-apirest#readme"
 }
