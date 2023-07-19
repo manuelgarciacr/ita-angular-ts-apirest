@@ -1,18 +1,21 @@
-# Compiling typescript in watch mode
+# IT Academy Angular Typescript API REST
 
-$ npx tsc -w
+## Compile and serve the website.
 
-or
+Inside the index.html file, the links to the stylesheets and js scripts differ slightly
+depending on the operating system (Windows or Linux). This can be prevented with a module.
+packager like Webpack.
 
-$ npm run watch
+$ npm start
 
-# Compiling scss
+The web is served at http://localhost:3150/src
 
-"Live Sass Compiler" vscode plugin
+If the port is in use, the server automatically asume a random port number.
 
-# Executing html
 
-"Live Server (Five Server)" vscode plugin
+TODO: Configure purgecss
+TODO: Configure webpack
+TODO: Configure stylelint: "css-lint": "stylelint scss/", "test": "npm-run-all css-lint css"
 
 
 

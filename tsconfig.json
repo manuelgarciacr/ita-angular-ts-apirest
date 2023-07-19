@@ -99,6 +99,6 @@
         "skipLibCheck": true, /* Skip type checking all .d.ts files. */
         "outDir": "src/js",
     },
-    "include": ["ts/*.ts"],
-    
+    "include": ["ts/*.ts"],    
+    "exclude": ["node_modules"]
 }

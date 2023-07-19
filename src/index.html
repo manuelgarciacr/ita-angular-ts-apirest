@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITA Angular TS & API REST</title>
+    <!-- Windows -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/index.css">
-    <script type="module" src="./js/index.js"></script>
+    <!-- Linux -->
+    <!-- <link rel="stylesheet" href="./src/css/bootstrap.css"> -->
+    <!-- <link rel="stylesheet" href="./src/css/index.css"> -->
 </head>
-<body>
-    <main>
-        <h1>JOKES</h1>
-        <div id="id-joke" width="50" height="50"></div>
-        <button id="id-next">NEXT JOKE</button>
-    </main>
+<body class="container-fluid">
+    <div class="row align-items-center flex-column h-100">
+        <h6 class="font-bold p-3">Avui: Parcialment ennuvolat</h6>
+        <main class="card shadow w-75 h-50 mt-5">
+            <div class="card-body d-flex flex-column align-items-center">
+                <h5 class="card-title align-self-center text-center">Preparat per riure? <span class="emoji emoji1F923" title="Rodando por el suelo de risa"></span></h5>
+                <p class="card-text w-100 flex-grow-1 min-h-5 mt-3" id="id-p-joke"></p>
+                <a href="#" class="btn btn-info align-self-sm-end" id="id-btn-next">Següent acudit</a>
+            </div>
+        </main>
+    </div>
+    <!-- Windows -->
+    <script src="./js/bootstrap.js" type="module"></script>
+    <script src="./js/index.js" type="module"></script>
+    <!-- Linux -->
+    <!-- <script src="./src/js/bootstrap.js" type="module"></script> -->
+    <!-- <script src="./src/js/index.js" type="module"></script> -->
 </body>
 </html>
