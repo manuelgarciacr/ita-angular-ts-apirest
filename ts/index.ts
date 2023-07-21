@@ -7,7 +7,7 @@ type JokeScore = {
     date: string
 }
 const reportJokes: Array<JokeScore> = [];
-const axiosInstance = axios.create({
+const axiosJokesInstance = axios.create({
     baseURL: 'https://icanhazdadjoke.com',
     timeout: 1000,
     headers: {'Accept': 'application/json'},
@@ -69,7 +69,7 @@ const resetStars = () => {
         setBg(i, false);
     reportStatus()
 }
-const getJoke = async () => await axiosInstance.get("");
+const getJoke = async () => await axiosJokesInstance.get("");
 const nextJoke = () => {
     getJoke().then(res => {
         const joke = res.data.joke;
