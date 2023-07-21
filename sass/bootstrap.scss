@@ -78,7 +78,7 @@ $utilities: map-merge((
 @import "bootstrap/scss/buttons";
 // @import "bootstrap/scss/transitions";
 // @import "bootstrap/scss/dropdown";
-// @import "bootstrap/scss/button-group";
+@import "bootstrap/scss/button-group";
 // @import "bootstrap/scss/nav";
 // @import "bootstrap/scss/navbar"; // Requires nav
 @import "bootstrap/scss/card";
@@ -103,6 +103,52 @@ $utilities: map-merge((
 // @import "bootstrap/scss/helpers";
 
 
-// Custom styles after this file
+// Custom styles after this point
 //
 
+body {
+  user-select: none;
+  height: 100vh;
+
+  &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      background-image: url("../img/fiesta.webp");
+      background-size: cover;
+      background-position: center;
+      opacity: .3;
+  }
+}
+
+main {
+  margin: auto 0;
+}
+
+#id-btngroup-stars>button {
+  background-image: url("../img/empty-star.svg");
+  background-size: cover;
+  background-position: center;
+  border-color: transparent;
+
+  &.gold:hover {
+      color: $primary!important;
+  }
+}
+
+.emoji {
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url(https://assets.piliapp.com/s3pxy/emoji/sprite/fb202208/s24@1-people.png);
+}
+
+.emoji1F923 {
+    background-position: -192px 0;
+}

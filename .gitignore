@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
 src/js/index.js
-src/css/.
+src/css/*
