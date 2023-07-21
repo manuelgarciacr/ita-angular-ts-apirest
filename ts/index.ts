@@ -1,5 +1,5 @@
 // @ts-ignore
-import axios from "./../../node_modules/axios/dist/esm/axios.js"
+import axios, { AxiosError, AxiosResponse } from "./../../node_modules/axios/dist/esm/axios.js"
  
 type JokeScore = {
     joke: string,
@@ -9,6 +9,12 @@ type JokeScore = {
 const reportJokes: Array<JokeScore> = [];
 const axiosJokesInstance = axios.create({
     baseURL: 'https://icanhazdadjoke.com',
+    timeout: 1000,
+    headers: {'Accept': 'application/json'},
+    responseType: 'json'
+});
+const axiosChuckInstance = axios.create({
+    baseURL: 'https://api.chucknorris.io/jokes/random',
     timeout: 1000,
     headers: {'Accept': 'application/json'},
     responseType: 'json'
@@ -69,10 +75,16 @@ const resetStars = () => {
         setBg(i, false);
     reportStatus()
 }
-const getJoke = async () => await axiosJokesInstance.get("");
+const getJoke = async () => {
+    const rnd = Math.random() < 0.5;
+
+    if (rnd)
+        return await axiosJokesInstance.get("").then((res: AxiosResponse) => res.data.joke);
+
+    return await axiosChuckInstance.get("").then((res: AxiosResponse) => res.data.value)
+}
 const nextJoke = () => {
-    getJoke().then(res => {
-        const joke = res.data.joke;
+    getJoke().then(joke => {
         const score: JokeScore = {
             joke: joke, 
             score: 0,
