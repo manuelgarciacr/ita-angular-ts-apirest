@@ -13,12 +13,27 @@ const axiosWeatherInstance = axios.create({
     headers: {'Accept': 'application/json'},
     responseType: 'json'
 });
+const getImage = (status: string) => {
+    status = status.toUpperCase();
+     
+    if (status.includes("DESPEJADO") || status.includes("SOL"))
+        return "clear-day.svg";
+    if (status.includes("INTERVALOS NUBOSOS") || status.includes("POCO NUBOSO")
+            || status.includes("NUBES ALTAS"))
+        return "partly-cloudy-day.svg";
+    if (status.includes("NUBOSO CON LLUVIA") || status.includes("INTERVALOS NUBOSOS CON LLUVIA ESCASA"))
+        return "partly-cloudy-day-rain.svg";
+    if (status.includes("MUY NUBOSO") || status.includes("NUBOSO"))
+        return "cloudy.svg";
+    if (status.includes("CUBIERTO CON LLUVIA ESCASA") || status.includes("LLUVIA"))
+        return "rain.svg";
+    return "partly-cloudy-day.svg"; 
+} 
 const getLocation = async (lat: number, lng: number) => await axiosLocationInstance.get(`&location=${lat}%2C${lng}`);
 const getProvinces = async () => await axiosWeatherInstance.get();
 const getCities = async () => await axiosWeatherInstance.get(`/${provinceCode}/municipios`);
 const getWeather = async () => await axiosWeatherInstance.get(`/${provinceCode}/municipios/${cityCode}`);
-const h6Location = document.getElementById("id-h6-location");
-const h6Weather = document.getElementById("id-h6-weather");
+const divWeather = document.getElementById("id-div-weather");
 let province = "";
 let provinceCode = "00";
 let city = "";
@@ -26,9 +41,11 @@ let cityCode = "00000";
 let location = "";
 let stateSky = "";
 let temp = "";
+let tempMaxMin = "";
 let wetness = "";
 let wind = "";
 let rain = "";
+let image = "";
 
 navigator.geolocation.getCurrentPosition(
     pos => getLocation(pos.coords.latitude, pos.coords.longitude)
@@ -47,7 +64,6 @@ navigator.geolocation.getCurrentPosition(
         return getCities()
     })
     .then(res => {
-        console.log("RES", province, provinceCode, city, cityCode, res.data.municipios);
         const citiesData: Array<{CODIGOINE: string, NOMBRE: string}> = 
             Object.values(res.data.municipios);
         const cities = citiesData.map(v => ({cod: v.CODIGOINE.slice(0, 5), name: v.NOMBRE.toUpperCase()}));
@@ -59,13 +75,17 @@ navigator.geolocation.getCurrentPosition(
     .then(res => {
         location = res.data.metadescripcion;
         stateSky = res.data.stateSky.description;
-        temp = `${res.data.temperatura_actual}º (max: ${res.data.temperaturas.max}, min: ${res.data.temperaturas.min})`
+        temp = `${res.data.temperatura_actual}°`;
+        tempMaxMin = `(max: ${res.data.temperaturas.max}, min: ${res.data.temperaturas.min})`
         wetness = res.data.humedad + "%";
         wind = res.data.viento + "km/h";
         rain = res.data.lluvia + "%";
+        image = getImage(stateSky);
 
-        h6Location!.innerHTML = location;
-        h6Weather!.innerText = `${stateSky}. ${temp}. Humedad: ${wetness}. Viento: ${wind}. Posibilidad de lluvia: ${rain}`
+        (divWeather!.getElementsByTagName("img")[0] as HTMLImageElement).src = `src/img/${image}`;
+        (divWeather!.getElementsByTagName("img")[0] as HTMLImageElement).alt = stateSky;
+        (divWeather!.getElementsByTagName("img")[0] as HTMLImageElement).title = stateSky;
+        (divWeather!.getElementsByTagName("p")[0] as HTMLImageElement).innerText = temp;
     }), 
     err => console.log("ERR", err), 
     {maximumAge: 60000, timeout: 10000, enableHighAccuracy: true});

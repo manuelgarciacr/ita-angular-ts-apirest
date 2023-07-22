@@ -110,3 +110,29 @@ document.querySelectorAll('#id-btngroup-stars>button').forEach(item => {
 
 btnNext!.addEventListener("click", nextJoke)
 
+// Animation
+
+const newPos = (svg: HTMLElement) => {
+    const pos = Math.random() * 85; // 100% - 15%
+    const side = Math.floor(Math.random() * 4)
+    let top, left: number;
+
+    switch (side) {
+        case 0: top = 0; left = pos; break;
+        case 1: top = pos; left = 85; break;
+        case 2: top = 85; left = pos; break;
+        default: top = pos; left = 0
+    }
+
+    svg.style.setProperty("--top", `${top}%`);
+    svg.style.setProperty("--left", `${left}%`)
+}
+
+document.querySelectorAll(".cls-svg-little").forEach((v, k) => {
+    const seg = 4 + k * .25;
+    (v as HTMLElement).style.setProperty("transition", `all ${seg}s linear`);
+    v.addEventListener('transitionend', (event) =>
+        newPos(event.target as HTMLElement)
+    , false )
+    newPos(v as HTMLElement);
+})
